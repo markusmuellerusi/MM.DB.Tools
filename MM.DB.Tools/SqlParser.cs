@@ -282,6 +282,14 @@ namespace MM.DB.Tools
                     Alias = alias,
                     Expression = expression
                 };
+
+                if (!string.IsNullOrWhiteSpace(field.Expression) &&
+                    field.Expression.StartsWith($"({BaseStatement.SelectKeyword}", IcIcCompare) &&
+                    field.Expression.EndsWith(")"))
+                {
+                    field.SubSelect = (SelectStatement) ParseSelectStatement(field.Expression.Trim('(').Trim(')'));
+                }
+
                 fields.Add(field);
             }
 

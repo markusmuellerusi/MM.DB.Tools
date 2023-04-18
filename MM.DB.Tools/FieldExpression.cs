@@ -16,6 +16,8 @@ namespace MM.DB.Tools
 
         public bool IsStarExpression => !string.IsNullOrWhiteSpace(Alias) && Alias.StartsWith(StarFieldName);
 
+        public SelectStatement SubSelect { get; set; }
+
         private static bool AliasNeedsBrackets(string alias)
         {
             return !string.IsNullOrWhiteSpace(alias) &&
